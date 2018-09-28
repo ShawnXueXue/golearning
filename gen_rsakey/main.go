@@ -22,7 +22,7 @@ func GenRasKey(bits int) error {
 		Type:  "RSA PRIVATE KEY",
 		Bytes: derStream,
 	}
-	file, err := os.Create("rsa/private.pem")
+	file, err := os.Create("C:/cert/private.pem")
 	if err != nil {
 		return err
 	}
@@ -40,7 +40,7 @@ func GenRasKey(bits int) error {
 		Type:  "PUBLIC KEY",
 		Bytes: derPkix,
 	}
-	file, err = os.Create("rsa/public.pem")
+	file, err = os.Create("C:/cert//public.pem")
 	if err != nil {
 		return err
 	}

@@ -26,7 +26,7 @@ func main() {
 }
 
 func Encrypt(orgData []byte) ([]byte, error) {
-	pubKey, _ := ioutil.ReadFile("rsa/public.pem")
+	pubKey, _ := ioutil.ReadFile("C:/cert/public.pem")
 	block, _ := pem.Decode(pubKey)
 	if block == nil {
 		return nil, errors.New("public key error")
@@ -40,7 +40,7 @@ func Encrypt(orgData []byte) ([]byte, error) {
 }
 
 func Decrypt(cipherText []byte) ([]byte, error) {
-	prvKey, _ := ioutil.ReadFile("rsa/private.pem")
+	prvKey, _ := ioutil.ReadFile("C:/cert/private.pem")
 	block, _ := pem.Decode(prvKey)
 	if block == nil {
 		return nil, errors.New("private key error")
