@@ -1,0 +1,4 @@
+get error when using glide:
+Unable to export dependencies to vendor directory: Error moving files: exit status 1. output:
+fix:
+https://github.com/Masterminds/glide/issues/873

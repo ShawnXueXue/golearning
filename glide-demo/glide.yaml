@@ -1,0 +1,11 @@
+package: golearning/glide-demo
+import:
+- package: github.com/gin-gonic/gin
+  version: v1.2
+  # Update failed for golang.org/x/sys: Cannot detect VCS:
+  # glide mirror set https://golang.org/x/sys https://github.com/golang/sys --vcs git
+  # OR
+  # add repo and vcs as following:
+- package: golang.org/x/sys
+  repo: https://github.com/golang/sys
+  vcs: git
