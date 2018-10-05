@@ -2,7 +2,9 @@ package main
 
 import "testing"
 
-func BenchmarkGetPrimes(b *testing.B) {
+// go test -bench=. -run=^$ golearing/puzzlers/article20_2
+
+func BenchmarkGetPrime(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		GetPrimes(100000)
 	}

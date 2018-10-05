@@ -1,4 +1,4 @@
-package article20_1
+package main
 
 import (
 	"flag"

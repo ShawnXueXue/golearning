@@ -1,11 +1,20 @@
-package article20_1
+package main
 
 import (
 	"fmt"
 	"testing"
 )
 
-func TestHelloo(t *testing.T) {
+// go test golearing/puzzlers/article20_1
+// go test golearing/puzzlers/article20_1 -v
+
+// go env GOCACHE  go缓存目录
+// go clean -cache  清理go的缓存
+// go clean -testcache  清理测试缓存
+
+// t.Error/t.Errorf = t.Log/t.Logf + t.Fail
+
+func TestHello(t *testing.T) {
 	var name string
 	greeting, err := hello(name)
 	if err == nil {
@@ -40,6 +49,7 @@ func TestIntroduce(t *testing.T) {
 }
 
 func TestFail(t *testing.T) {
-	t.FailNow()
+	t.Fail()
+	//t.FailNow()
 	t.Log("Failed.")
 }
