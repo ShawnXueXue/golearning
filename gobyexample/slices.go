@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"reflect"
+	"unsafe"
 )
 
 func main() {
@@ -14,9 +15,13 @@ func main() {
 	s[2] = "c"
 	fmt.Println("set:", s)
 	fmt.Println("get:", s[2])
-	fmt.Println("len:", len(s))
+	fmt.Printf("  s len:%d,   s cap:%d\n", len(s), cap(s))
 	s = append(s, "d")
+	fmt.Printf("  s len:%d,   s cap:%d\n", len(s), cap(s))
 	s = append(s, "e", "f")
+	fmt.Printf("  s len:%d,   s cap:%d\n", len(s), cap(s))
+	s = append(s, "g")
+	fmt.Printf("  s len:%d,   s cap:%d\n", len(s), cap(s))
 	fmt.Println("apd:", s)
 	c := make([]string, len(s))
 	copy(c, s)
@@ -28,6 +33,11 @@ func main() {
 	fmt.Println("sl2:", l)
 	l = s[2:]
 	fmt.Println("sl3:", l)
+	l = s[:]
+	slice1 := (*Slice)(unsafe.Pointer(&l))
+	slice2 := (*Slice)(unsafe.Pointer(&s))
+	fmt.Printf("  s len:%d,   s cap:%d,   s ptr:%p,   s data ptr:%p\n", len(s), cap(s), &s, slice2.Ptr)
+	fmt.Printf("sl4 len:%d, sl4 cap:%d, sl4 ptr:%p, sl4 data ptr:%p\n", len(l), cap(l), &l, slice1.Ptr)
 
 	t := []string{"g", "h", "l"}
 	fmt.Println("dcl:", t)
@@ -41,4 +51,10 @@ func main() {
 		}
 	}
 	fmt.Println("twoD:", twoD)
+}
+
+type Slice struct {
+	Ptr unsafe.Pointer
+	len int
+	cap int
 }

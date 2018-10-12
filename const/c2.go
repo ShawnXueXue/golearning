@@ -38,8 +38,8 @@ func t1() {
 		//左移3位
 		m
 	)
-	fmt.Println("i=", j)
-	fmt.Println("j=", k)
-	fmt.Println("k=", l)
-	fmt.Println("l=", m)
+	fmt.Println("j=", j)
+	fmt.Println("k=", k)
+	fmt.Println("l=", l)
+	fmt.Println("m=", m)
 }
