@@ -62,7 +62,7 @@ func m4() {
 	fmt.Println(m.Type)
 	fmt.Println(m.Func)
 
-	reflect.ValueOf(f).MethodByName("Do").Call([]reflect.Value{})
+	reflect.ValueOf(f).MethodByName(m.Name).Call([]reflect.Value{})
 }
 
 // Kind
@@ -129,6 +129,12 @@ func m8() {
 	fmt.Println(fe.CanSet())
 	fe.SetInt(456)
 	fmt.Println(i)
+
+	f := Foo{"abc", 123}
+	elem := reflect.ValueOf(&f).Elem()
+	elem.FieldByName("X").SetString("def")
+	elem.FieldByName("Y").SetInt(456)
+	fmt.Println(f)
 }
 
 func main() {
