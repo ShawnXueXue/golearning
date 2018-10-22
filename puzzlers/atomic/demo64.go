@@ -66,11 +66,31 @@ func main() {
 		fmt.Printf("error: %s\n", err)
 	}
 	fmt.Printf("Store a value of type %T that implements error interface to box5.\n", v42)
+	// ???
 	box5.Store(v42)
 	if err != nil {
 		fmt.Printf("error: %s\n", err)
 	}
 	fmt.Println()
+
+	// 6
+	var box6 atomic.Value
+	v6 := []int{1, 2, 3}
+	fmt.Printf("Store %v to box6.\n", v6)
+	box6.Store(v6)
+	v6[1] = 4
+	fmt.Printf("The value load from box6 is %v\n", box6.Load())
+	// right way
+	v6 = []int{1, 2, 3}
+	store := func(v []int) {
+		replace := make([]int, len(v))
+		copy(replace, v)
+		box6.Store(replace)
+	}
+	fmt.Printf("Store %v to box6.\n", v6)
+	store(v6)
+	v6[1] = 4
+	fmt.Printf("The value load from box6 is %v\n", box6.Load())
 }
 
 type atomicValue struct {
