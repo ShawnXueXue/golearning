@@ -7,8 +7,8 @@ import (
 )
 
 func main() {
-	//propergateTest()
-	closeTest()
+	propergateTest()
+	//closeTest()
 }
 
 func propergateTest() {
@@ -17,26 +17,39 @@ func propergateTest() {
 	p2Ctx, _ := context.WithCancel(rootCtx)
 	p1cCtx, _ := context.WithCancel(p1Ctx)
 	go func() {
-		select {
-		case <-p1Ctx.Done():
+		_, ok := <-p1Ctx.Done()
+		if !ok {
 			fmt.Println("p1 cancel.")
 		}
+		//select {
+		//case <-p1Ctx.Done():
+		//	fmt.Println("p1 cancel.")
+		//}
 	}()
 	go func() {
-		select {
-		case <-p2Ctx.Done():
+		_, ok := <-p2Ctx.Done()
+		if !ok {
 			fmt.Println("p2 cancel.")
 		}
+		//select {
+		//case <-p2Ctx.Done():
+		//	fmt.Println("p2 cancel.")
+		//}
 	}()
 	go func() {
-		select {
-		case <-p1cCtx.Done():
+		_, ok := <-p1cCtx.Done()
+		if !ok {
 			fmt.Println("p1c cancel.")
 		}
+		//select {
+		//case <-p1cCtx.Done():
+		//	fmt.Println("p1c cancel.")
+		//}
 	}()
+	time.Sleep(time.Millisecond * 500)
 	cancel()
-	//<-rootCtx.Done()
-	time.Sleep(time.Second * 1)
+	<-rootCtx.Done()
+	time.Sleep(time.Millisecond * 500)
 }
 
 func closeTest() {
