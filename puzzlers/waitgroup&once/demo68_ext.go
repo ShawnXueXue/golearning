@@ -7,7 +7,8 @@ import (
 )
 
 func main() {
-	propergateTest()
+	//propergateTest()
+	closeTest()
 }
 
 func propergateTest() {
@@ -36,4 +37,25 @@ func propergateTest() {
 	cancel()
 	//<-rootCtx.Done()
 	time.Sleep(time.Second * 1)
+}
+
+func closeTest() {
+	c := make(chan int)
+	go func() {
+		for {
+			select {
+			case i, ok := <-c:
+				if ok {
+					fmt.Printf("get: %v\n", i)
+				} else {
+					fmt.Println("end")
+					return
+				}
+			}
+		}
+	}()
+	c <- 1
+	c <- 1
+	close(c)
+	time.Sleep(time.Second)
 }

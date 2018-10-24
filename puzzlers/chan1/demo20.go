@@ -11,7 +11,7 @@ func main() {
 	fmt.Printf("len: %d, cap: %d\n", len(ch1), cap(ch1))
 	ch1 <- 3
 	fmt.Printf("len: %d, cap: %d\n", len(ch1), cap(ch1))
-	elem1 := <- ch1
+	elem1 := <-ch1
 	fmt.Printf("len: %d, cap: %d\n", len(ch1), cap(ch1))
 	fmt.Printf("The first element received from channel ch1: %v\n", elem1)
 }
