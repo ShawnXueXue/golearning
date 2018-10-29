@@ -18,6 +18,7 @@ func main() {
 		myKey(60),
 		myKey(61),
 	}
+
 	values := []string{
 		"value in node2",
 		"value in node3",
