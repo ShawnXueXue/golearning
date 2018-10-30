@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"reflect"
+	"strings"
 	"unsafe"
 )
 
@@ -13,6 +14,8 @@ func main() {
 	s[0] = "a"
 	s[1] = "b"
 	s[2] = "c"
+	fmt.Println(index(s, "1"))
+	fmt.Println(strings.Index("abc", "b"))
 	fmt.Println("set:", s)
 	fmt.Println("get:", s[2])
 	fmt.Printf("  s len:%d,   s cap:%d\n", len(s), cap(s))
@@ -29,7 +32,7 @@ func main() {
 
 	l := s[2:5]
 	fmt.Println("sl1:", l)
-	l = s[:5]
+	l = s[0:5]
 	fmt.Println("sl2:", l)
 	l = s[2:]
 	fmt.Println("sl3:", l)
@@ -57,4 +60,13 @@ type Slice struct {
 	Ptr unsafe.Pointer
 	len int
 	cap int
+}
+
+func index(list []string, target string) int {
+	for i, v := range list {
+		if v == target {
+			return i
+		}
+	}
+	return -1
 }

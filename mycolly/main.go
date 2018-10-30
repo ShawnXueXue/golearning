@@ -12,7 +12,7 @@ import (
 
 func main() {
 	//simpleColly()
-	collyAndGoquery()
+	//collyAndGoquery()
 }
 
 func simpleColly() {
