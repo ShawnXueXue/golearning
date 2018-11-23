@@ -113,4 +113,20 @@ func main() {
 	fmt.Printf("Can the same file descriptor represent the same file? %v\n",
 		file5b.Name() == file5a.Name())
 	fmt.Println()
+
+	// 6
+	fmt.Printf("Reuse a file on path %s ...\n", filePath1)
+	file6, err := os.OpenFile(filePath1, os.O_WRONLY|os.O_TRUNC, 0666)
+	if err != nil {
+		fmt.Printf("error: %v\n", err)
+		return
+	}
+	contents := "something"
+	fmt.Printf("Write %q to the file ...\n", contents)
+	n, err := file6.WriteString(contents)
+	if err != nil {
+		fmt.Printf("error: %v\n", err)
+	} else {
+		fmt.Printf("The number of bytes written is %d.\n", n)
+	}
 }
