@@ -34,4 +34,10 @@ func main() {
 	r3 := rand.New(s3)
 	p(r3.Intn(100), ",")
 	p(r3.Intn(100))
+	pl()
+
+	max := 10
+	for j := 0; j < max; j++ {
+		p(rand.Int63n(int64(max)), ",")
+	}
 }
