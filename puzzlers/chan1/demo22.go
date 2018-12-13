@@ -10,7 +10,7 @@ func main() {
 			ch1 <- i
 		}
 		fmt.Println("Sender: close the channel...")
-		//close(ch1)
+		close(ch1)
 	}()
 
 	for {
