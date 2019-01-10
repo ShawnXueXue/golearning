@@ -34,7 +34,7 @@ func main() {
 				goto Exit
 			}
 		default:
-			time.Sleep(time.Second * 1)
+			time.Sleep(time.Millisecond * 500)
 			fmt.Println("waiting...")
 		}
 	}
