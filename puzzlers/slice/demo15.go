@@ -14,7 +14,7 @@ func main() {
 	fmt.Printf("Value of s2: %d\n", s2)
 	fmt.Println()
 	// 2
-	s3 := []int{1, 2, 3, 4 ,5, 6, 7, 8}
+	s3 := []int{1, 2, 3, 4, 5, 6, 7, 8}
 	s4 := s3[3:6]
 	fmt.Printf("Length of s4: %d\n", len(s4))
 	fmt.Printf("Capacity of s4: %d\n", cap(s4))
