@@ -26,7 +26,7 @@ var expectedPrimes = []int{
 	947, 953, 967, 971, 977, 983, 991, 997,
 }
 
-// go test -bench=. -run=^$ golearning/puzzlers/article21_q1 -cpu=2,4 -count=2
+// go test -bench=. -run=^$ golearning/puzzlers/article21_q1 -cpu=2,4 -count=2 -benchmem
 
 func TestGetPrimesWith1000(t *testing.T) {
 	max := 1000
@@ -43,18 +43,21 @@ func TestGetPrimesWith1000(t *testing.T) {
 }
 
 func BenchmarkGetPrimesWith100(b *testing.B) {
+	b.Log(b.N)
 	for i := 0; i < b.N; i++ {
 		GetPrimes(100)
 	}
 }
 
 func BenchmarkGetPrimesWith10000(b *testing.B) {
+	b.Log(b.N)
 	for i := 0; i < b.N; i++ {
 		GetPrimes(10000)
 	}
 }
 
 func BenchmarkGetPrimesWith1000000(b *testing.B) {
+	b.Log(b.N)
 	for i := 0; i < b.N; i++ {
 		GetPrimes(1000000)
 	}
