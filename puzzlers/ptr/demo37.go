@@ -21,10 +21,7 @@ func main() {
 	// 1
 	dog := Dog{"little pig"}
 	dogP := &dog
-	dogPtr := uintptr(unsafe.Pointer(dogP))
-
-	namePtr := dogPtr + unsafe.Offsetof(dogP.name)
-	nameP := (*string)(unsafe.Pointer(namePtr))
+	nameP := (*string)(unsafe.Pointer(uintptr(unsafe.Pointer(dogP)) + unsafe.Offsetof(dog.name)))
 	fmt.Printf("nameP == &(dogP.name)? %v\n", nameP == &(dogP.name))
 	fmt.Printf("The name of dog is %q.\n", *nameP)
 
@@ -33,7 +30,7 @@ func main() {
 	fmt.Println()
 
 	// 2
-	numP := (*int)(unsafe.Pointer(namePtr))
+	numP := (*int)(unsafe.Pointer((uintptr(unsafe.Pointer(dogP)) + unsafe.Offsetof(dog.name))))
 	num := *numP
 	fmt.Printf("This is an unexpected number: %d\n", num)
 }

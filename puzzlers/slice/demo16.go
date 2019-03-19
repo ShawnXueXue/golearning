@@ -1,19 +1,24 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"unsafe"
+)
 
 func main() {
 	bytes := append([]byte("hello"), "world"...)
 	fmt.Printf("bytes: %s, len: %d, cap: %d\n", string(bytes), len(bytes), cap(bytes))
 	fmt.Println()
+	PtrSize := 4 << (^uintptr(0) >> 63)
+	fmt.Println(PtrSize)
 	// 1
 	s6 := make([]int, 0)
 	fmt.Printf("%p -> ", s6)
 	fmt.Printf("The capacity of s6: %d\n", cap(s6))
 	for i := 1; i <= 5; i++ {
-		fmt.Printf("%p -> ", s6)
+		fmt.Printf("%p -> ", (*Slice)(unsafe.Pointer(&s6)).Ptr)
 		s6 = append(s6, i)
-		fmt.Printf("%p, ", s6)
+		fmt.Printf("%p, ", (*Slice)(unsafe.Pointer(&s6)).Ptr)
 		fmt.Printf("s6(%d): len: %d, cap: %d\n", i, len(s6), cap(s6))
 	}
 	fmt.Println(s6)
@@ -37,4 +42,10 @@ func main() {
 	fmt.Printf("s8b: len: %d, cap: %d\n", len(s8b), cap(s8b))
 	s8c := append(s8b, make([]int, 45)...)
 	fmt.Printf("s8c: len: %d, cap: %d\n", len(s8c), cap(s8c))
+}
+
+type Slice struct {
+	Ptr unsafe.Pointer
+	len int
+	cap int
 }
