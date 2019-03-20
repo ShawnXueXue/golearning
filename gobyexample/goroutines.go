@@ -21,5 +21,24 @@ func main() {
 
 	var input string
 	fmt.Scanln(&input)
-	fmt.Println("done")
+	fmt.Println("done:", input)
 }
+
+//func main() {
+//	min, max := 0, 100
+//	fmt.Printf("%d--%d", min, max)
+//	for min < max  {
+//		i := (min + max) / 2
+//		fmt.Printf("<=%d(y or n)  ", i)
+//		var s string
+//		//fmt.Scanf("%s", &s)
+//		//fmt.Scan(&s)
+//		fmt.Scanln(&s)
+//		if s != "" && s[0] == 'y' {
+//			max = i
+//		} else {
+//			min = i + 1
+//		}
+//	}
+//	fmt.Printf("%d\n", max)
+//}
