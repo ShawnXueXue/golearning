@@ -14,4 +14,16 @@ func main() {
 		fmt.Printf("s9: %v (len: %d, cap: %d)\n", s9, len(s9), cap(s9))
 	}
 	fmt.Printf("a1: %v (len: %d, cap: %d)\n", a1, len(a1), cap(a1))
+
+	fmt.Println()
+	s := []int{0, 1, 2, 3, 4, 5}
+	ss := s[4:5]
+	fmt.Println(s)
+	fmt.Println(ss)
+	//ss = append(ss, 55)
+	ss = append(ss, []int{55, 66}...)
+	ss[0] = 44
+	fmt.Println(s)
+	fmt.Println(ss)
+
 }
