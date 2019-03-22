@@ -20,9 +20,12 @@ func main() {
 	ss := s[4:5]
 	fmt.Println(s)
 	fmt.Println(ss)
-	//ss = append(ss, 55)
-	ss = append(ss, []int{55, 66}...)
+	ss = append(ss, 55)
 	ss[0] = 44
+	fmt.Println(s)
+	fmt.Println(ss)
+	ss = append(ss, 66)
+	ss[0] = 444
 	fmt.Println(s)
 	fmt.Println(ss)
 
