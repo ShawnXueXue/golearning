@@ -25,7 +25,7 @@ go tool pprof -alloc_space http://xxxx/debug/pprof/heap
 	2. top -cum来查找，-cum的意思就是，将函数调用关系 中的数据进行累积，比如A函数调用的B函数，则B函数中的内存分配量也会累积到A上面，这样就可以很容易的找出调用链。
 	3. web查看图片
 
-如果程序已经没有反应了, 可以 kill -SIGQUIT <pid>, 可执行程序统计目录下生成core.pid文件, 使用delve main core.pid 分析dump
+如果程序已经没有反应了, 可以 kill -SIGQUIT <pid>, 可执行程序同一目录下生成core.pid文件, 使用delve main core.pid 分析dump
 需要预先做两件事: ulimit -c unlimited; GOTRACEBACK=crash ./main
 */
 func main() {
