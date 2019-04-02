@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"time"
 )
 
@@ -18,4 +19,15 @@ func main() {
 
 	fmt.Println(time.Unix(secs, 1))
 	fmt.Println(time.Unix(1, nanos))
+	//cn := "𠑗"
+	//cn := "𧺯"
+	cn := "丁"
+	bb := []byte(cn)
+	for _, i := range bb {
+		fmt.Printf("%x-", i)
+	}
+	fmt.Println()
+	fmt.Println(strconv.QuoteToASCII(cn))
+	fmt.Println(len(cn))
+	fmt.Println(len(([]rune(cn))))
 }
