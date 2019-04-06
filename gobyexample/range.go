@@ -31,18 +31,23 @@ type student struct {
 }
 
 func main() {
-	m := make(map[string]*student)
-	stus := []student{
-		{Name: "zhou", Age: 24},
-		{Name: "li", Age: 23},
-		{Name: "wang", Age: 22},
+	//m := make(map[string]*student)
+	//stus := []student{
+	//	{Name: "zhou", Age: 24},
+	//	{Name: "li", Age: 23},
+	//	{Name: "wang", Age: 22},
+	//}
+	//for i, stu := range stus {
+	//	fmt.Printf("%p, %p\n", &stu, &stus[i])
+	//	m[stu.Name] = &stu
+	//}
+	aa := "aaaaa"
+	for i, v := range aa {
+		fmt.Println(i, v)
 	}
-	for i, stu := range stus {
-		fmt.Printf("%p, %p\n", &stu, &stus[i])
-		m[stu.Name] = &stu
-	}
-	fmt.Println(m["zhou"])
-	fmt.Println(m["li"])
-	fmt.Println(m["wang"])
-	fmt.Println(m)
+	a := charSet
+	//fmt.Println(m["zhou"])
+	//fmt.Println(m["li"])
+	//fmt.Println(m["wang"])
+	//fmt.Println(m)
 }
