@@ -10,7 +10,7 @@ func main() {
 	go func() {
 		errorMsg <- "problem"
 	}()
-	time.Sleep(500 * time.Millisecond)
+	time.Sleep(400 * time.Millisecond)
 	select {
 	case msg := <-errorMsg:
 		fmt.Println("get error:" + msg)
