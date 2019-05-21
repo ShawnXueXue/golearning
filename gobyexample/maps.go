@@ -9,7 +9,8 @@ func main() {
 	m["k1"] = 7
 	m["k2"] = 13
 	fmt.Println("map:", m)
-
+	var f float64 = 10.2
+	fmt.Println(int(f * 1.25))
 	//v1 := m["k1"]
 	//fmt.Println("v1:", v1)
 	//fmt.Println("len:", len(m))

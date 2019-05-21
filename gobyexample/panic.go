@@ -1,13 +1,20 @@
 package main
 
 import (
-	"os"
+	"fmt"
+	"time"
 )
 
 func main() {
-	panic("a problem")
-	_, err := os.Create("/tmp/file")
-	if err != nil {
-		panic(err)
+	errorMsg := make(chan string, 4)
+	go func() {
+		errorMsg <- "problem"
+	}()
+	time.Sleep(500 * time.Millisecond)
+	select {
+	case msg := <-errorMsg:
+		fmt.Println("get error:" + msg)
+	default:
+		fmt.Println("ok")
 	}
 }

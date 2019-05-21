@@ -43,4 +43,12 @@ func main() {
 	fmt.Println(s.Pop().(temp).a)
 	fmt.Println(s.Pop())
 	fmt.Println(s.Pop())
+	m := make(map[string]interface{})
+	if m["1"] == nil {
+		fmt.Println("Y")
+	} else {
+		fmt.Println("N")
+	}
+	var aa []string
+	aa = append(aa, aa...)
 }
