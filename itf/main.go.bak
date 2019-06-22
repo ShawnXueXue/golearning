@@ -1,0 +1,64 @@
+package main
+
+import "fmt"
+
+type Person interface {
+	Speak() string
+}
+
+type Teacher struct {
+	Class string
+}
+
+func (t Teacher) Speak() string {
+	return fmt.Sprintf("I teach %s!", t.Class)
+}
+
+type Student struct {
+	Grade string
+}
+
+func (s Student) Speak() string {
+	return fmt.Sprintf("I am %s grade student!", s.Grade)
+}
+
+func Speech(p Person) {
+	fmt.Println(p.Speak())
+}
+
+type Point struct {
+	X, Y float64
+}
+
+func (p Point) Add(q Point) Point {
+	return Point{X: p.X + q.X, Y: p.Y + q.Y}
+}
+
+func Add(p, q Point) {
+
+}
+
+func (p Point) Sub(q Point) Point {
+	return Point{X: p.X - q.X, Y: p.Y - q.Y}
+}
+
+type Path []Point
+
+func (path Path) TranslateBy(offset Point, add bool) {
+	var op func(p, q Point) Point
+	if add {
+		op = Point.Add
+	} else {
+		op = Point.Sub
+	}
+	for i := range path {
+		path[i] = op(path[i], offset)
+	}
+}
+
+func main() {
+	//tt := Teacher{Class: "Math"}
+	//ss := &Student{Grade: "Junior"}
+	//Speech(tt)
+	//Speech(ss)
+}
