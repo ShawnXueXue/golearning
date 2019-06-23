@@ -13,9 +13,12 @@ func SayHello(repeat int) {
 }
 
 func main() {
-	SayHello(1)
-	for i := 1; i < 5; i++ {
-		go SayHello(i)
-	}
-	time.Sleep(time.Hour)
+	//SayHello(1)
+	//for i := 1; i < 5; i++ {
+	//	go SayHello(i)
+	//}
+	//time.Sleep(time.Hour)
+	fmt.Println(time.Now().Format("20060102150405"))
+	var aa []string
+	fmt.Println(len(aa))
 }

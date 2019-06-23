@@ -3,11 +3,16 @@ package main
 import (
 	"fmt"
 	"reflect"
+	"time"
 )
 
 type Foo struct {
 	X string
 	Y int
+}
+type FooPtr struct {
+	X *string
+	Y *int
 }
 
 // 方法必须为public,才可以被Type.Method()获取
@@ -96,9 +101,11 @@ func m6() {
 
 // Value.field
 func m7() {
-	var foo = Foo{"abc", 123}
+	abc := "abc"
+	num := 123
+	var foo = FooPtr{&abc, &num}
 	val := reflect.ValueOf(foo)
-	fmt.Println(val.FieldByName("Y"))
+	fmt.Println(val.FieldByName("Y").Kind())
 	typ := reflect.TypeOf(foo)
 	fmt.Println(typ.FieldByName("Y"))
 	rv := reflect.ValueOf(foo)
@@ -138,20 +145,139 @@ func m8() {
 }
 
 func main() {
-	fmt.Println("m1-------------------")
-	m1()
-	fmt.Println("m2-------------------")
-	m2()
-	fmt.Println("m3-------------------")
-	m3()
-	fmt.Println("m4-------------------")
-	m4()
-	fmt.Println("m5-------------------")
-	m5()
-	fmt.Println("m6-------------------")
-	m6()
-	fmt.Println("m7-------------------")
-	m7()
+	//fmt.Println("m1-------------------")
+	//m1()
+	//fmt.Println("m2-------------------")
+	//m2()
+	//fmt.Println("m3-------------------")
+	//m3()
+	//fmt.Println("m4-------------------")
+	//m4()
+	//fmt.Println("m5-------------------")
+	//m5()
+	//fmt.Println("m6-------------------")
+	//m6()
+	//fmt.Println("m7-------------------")
+	//m7()
 	fmt.Println("m8-------------------")
 	m8()
+
+	fmt.Println(time.Now())
+	//var size1 int64 = 50
+	//var size2 int64 = 50
+	//var createat1 = "2"
+	//var createat2 = "2"
+	//example := &CmdbDisk{Size: &size1, CreateAt: &createat1, Deleted: 0, Deadline: "d"}
+	//old := CmdbDisk{Size: &size2, CreateAt: &createat2, Deleted: 0, Deadline: "d"}
+	//setFields := []string{"Size","CreateAt","Deleted","Deadline"}
+	//fmt.Println(Updated(example, old, setFields))
+
+	//ar := []string{"1","2","3","4"}
+	//fmt.Println(ar[2: 4])
+}
+
+func updated(example *CmdbDisk, old *CmdbDisk, setFields []string) (bool, error) {
+	for _, setField := range setFields {
+		exampleVal := reflect.ValueOf(*example)
+		oldVal := reflect.ValueOf(*old)
+		expFieldValue := exampleVal.FieldByName(setField)
+		oldFieldValue := oldVal.FieldByName(setField)
+		if expFieldValue.Kind().String() == "ptr" {
+			expFieldValue = expFieldValue.Elem()
+			oldFieldValue = oldFieldValue.Elem()
+		}
+		fmt.Println(expFieldValue.Kind())
+		fmt.Println(oldFieldValue.Kind())
+		switch expFieldValue.Kind() {
+		case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
+			if expFieldValue.Int() != oldFieldValue.Int() {
+				return true, nil
+			}
+		case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
+			if expFieldValue.Uint() != oldFieldValue.Uint() {
+				return true, nil
+			}
+		case reflect.String:
+			if expFieldValue.String() != oldFieldValue.String() {
+				return true, nil
+			}
+		case reflect.Float32, reflect.Float64:
+			if expFieldValue.Float() != oldFieldValue.Float() {
+				return true, nil
+			}
+		case reflect.Bool:
+			if expFieldValue.Bool() != oldFieldValue.Bool() {
+				return true, nil
+			}
+		case reflect.Complex64, reflect.Complex128:
+			if expFieldValue.Complex() != oldFieldValue.Complex() {
+				return true, nil
+			}
+		default:
+			return false, fmt.Errorf("unsopprted field type: %s, field name: %s", expFieldValue.Kind(), setField)
+		}
+	}
+	return false, nil
+}
+
+func Updated(example interface{}, old interface{}, setFields []string) (bool, error) {
+	exampleVal := reflect.ValueOf(example)
+	oldVal := reflect.ValueOf(old)
+	if exampleVal.Kind().String() == "ptr" {
+		exampleVal = exampleVal.Elem()
+	}
+	if oldVal.Kind().String() == "ptr" {
+		oldVal = oldVal.Elem()
+	}
+	for _, setField := range setFields {
+		expFieldValue := exampleVal.FieldByName(setField)
+		oldFieldValue := oldVal.FieldByName(setField)
+		if expFieldValue.Kind().String() == "ptr" {
+			expFieldValue = expFieldValue.Elem()
+			oldFieldValue = oldFieldValue.Elem()
+		}
+		switch expFieldValue.Kind() {
+		case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
+			if expFieldValue.Int() != oldFieldValue.Int() {
+				return true, nil
+			}
+		case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
+			if expFieldValue.Uint() != oldFieldValue.Uint() {
+				return true, nil
+			}
+		case reflect.String:
+			if expFieldValue.String() != oldFieldValue.String() {
+				return true, nil
+			}
+		case reflect.Float32, reflect.Float64:
+			if expFieldValue.Float() != oldFieldValue.Float() {
+				return true, nil
+			}
+		case reflect.Bool:
+			if expFieldValue.Bool() != oldFieldValue.Bool() {
+				return true, nil
+			}
+		case reflect.Complex64, reflect.Complex128:
+			if expFieldValue.Complex() != oldFieldValue.Complex() {
+				return true, nil
+			}
+		default:
+			return false, fmt.Errorf("unsopprted field type: %s, field name: %s", expFieldValue.Kind(), setField)
+		}
+	}
+	return false, nil
+}
+
+type CmdbDisk struct {
+	Id          int64   `json:"Id,omitempty"`
+	Uid         string  `json:"Uid,omitempty"`
+	Name        string  `json:"Name,omitempty"`
+	Size        *int64  `json:"Size,omitempty"`
+	State       *int64  `json:"State,omitempty"`
+	Type        *int64  `json:"Type,omitempty"`
+	Usage       *int64  `json:"Usage,omitempty" orm:"column(u_usage)"`
+	InstanceUid string  `json:"InstanceUid,omitempty"`
+	CreateAt    *string `json:"CreateAt,omitempty"`
+	Deadline    string  `json:"Deadline,omitempty"`
+	Deleted     int64   `json:"Deleted,omitempty"`
 }
